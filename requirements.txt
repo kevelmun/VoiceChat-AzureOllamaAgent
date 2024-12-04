@@ -1,0 +1,10 @@
+python-dotenv
+azure-cognitiveservices-speech
+sounddevice
+scipy
+numpy
+webrtcvad
+simpleaudio 
+ollama
+# https://github.com/openai/swarm.git
+soundfile

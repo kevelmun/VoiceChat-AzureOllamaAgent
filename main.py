@@ -3,6 +3,8 @@ import tts
 import util
 import os
 import agent
+import llm
+
 
 def main():
     # Definir y crear el directorio temporal
@@ -21,8 +23,9 @@ def main():
         # Limpiar archivos WAV temporales
         util.clean_wav_files(tmp_dir)
         
-        response = agent.agent_response(text)
-
+        # response = agent.agent_response(text)
+        response = llm.model_response(text)
+        
         if response is not None:
             print("Texto reconocido:", response)
             

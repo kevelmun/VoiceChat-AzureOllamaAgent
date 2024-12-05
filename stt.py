@@ -62,6 +62,7 @@ def record_audio_to_file():
     max_silence_frames = int(silence_duration * 1000 / frame_duration)
 
     try:
+        print("Escuchando microfono...")
         with sd.RawInputStream(samplerate=fs,
                                blocksize=0,  # Dejar que la API determine el tamaño del bloque
                                channels=channels,
@@ -69,6 +70,7 @@ def record_audio_to_file():
                                device=device) as stream:
             while True:
                 # Leer un frame de audio
+                
                 frames_per_chunk = int(fs * frame_duration / 1000)
                 frame, overflowed = stream.read(frames_per_chunk)
 

@@ -7,20 +7,43 @@ current_date = datetime.now().strftime("%Y-%m")
 # Initialize Swarm client
 client = Swarm()
 
+conversation_history = []
 
-agent = Agent(
+def transfer_to_agent_exit():
+    return agent_exit
+
+main_agent = Agent(
     name="Loly-MIDI",
-    instructions="Respond in Spanish, don't use asterisk (*) on your responses to change formt, your text is lisened not readed. You are an Agent called Loly-MIDI, serving as an educational tool with the objective to improve the development of social and cognitive skills in children, focusing on ASD.",
-    model="llama3.2"
-    )
+    instructions="Respond in Spanish, don't use asterisk (*) on your responses to change format, your text is lisened not readed.",
+    model="loly",
+)
+agent_exit = Agent(
+    name="Loly-exit",
+    instructions="Identify if any sentence aims to end the conversation. If you identify that the conversation is intended to be ended, respond with the word 'exit'",
+    model="loly"
+)
+
+
 
 
 def agent_response(user_input):
-    response = client.run(
-        agent=agent,
-        messages=[
-            {"role": "user", "content": user_input}
-        ]
-    )
+    conversation_history.append({'role': 'user', 'content': user_input})
 
-    return  response.messages[-1]["content"]
+    response = client.run(
+        agent=main_agent,
+        messages=conversation_history
+    )
+    response_content = response.messages[-1]["content"]
+    conversation_history.append({'role': 'assistant', 'content': response_content})
+    
+    print(f"\n\n\n {response_content} \n\n\n")
+    
+    exit_control_response = client.run(
+        agent=agent_exit,
+        messages=[{"role": "user", "content": user_input }]
+    )
+    exit_control_response_content = exit_control_response.messages[-1]["content"]
+
+    if exit_control_response_content == "exit":
+        return "exit"
+    return  response_content

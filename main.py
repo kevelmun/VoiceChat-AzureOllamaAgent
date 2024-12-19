@@ -32,12 +32,11 @@ def main():
         util.clean_wav_files(tmp_dir)
         
 
-        response = agent.agent_response(text)
-        # response = llm.model_response(text)
+        # response = agent.agent_response(text)
+        response = llm.model_response(text)
         total_time.append(util.report_time("Respuesta del modelo: "))  
 
         if (response is not None) and response != "exit":
-            print("Texto reconocido:", response)
             
             # Convertir el texto a voz
             tts.text_to_speech(response)

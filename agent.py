@@ -1,8 +1,4 @@
-from datetime import datetime
 from swarm import Swarm, Agent
-# from duckduckgo_search import DDGS
-
-current_date = datetime.now().strftime("%Y-%m")
 
 # Initialize Swarm client
 client = Swarm()
@@ -15,12 +11,12 @@ def transfer_to_agent_exit():
 main_agent = Agent(
     name="Loly-MIDI",
     instructions="Respond in Spanish, don't use asterisk (*) on your responses to change format, your text is lisened not readed.",
-    model="loly",
+    model="loly:latest",
 )
 agent_exit = Agent(
     name="Loly-exit",
     instructions="Identify if any sentence aims to end the conversation. If you identify that the conversation is intended to be ended, respond with the word 'exit'",
-    model="loly"
+    model="loly:latest"
 )
 
 
@@ -28,7 +24,7 @@ agent_exit = Agent(
 
 def agent_response(user_input):
     conversation_history.append({'role': 'user', 'content': user_input})
-
+    
     response = client.run(
         agent=main_agent,
         messages=conversation_history

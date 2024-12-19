@@ -54,6 +54,8 @@ Install the necessary dependencies using `pip`:
 pip install -r requirements.txt
 ```
 
+> **Note**: The `swarm` dependency, necessary for the use of agents, is listed in the `requirements.txt` but commented out. You can uncomment it to enable agents.
+
 ### 5. Configure Azure Credentials
 
 Create a `.env` file in the root directory of the project and add your Azure credentials:
@@ -64,6 +66,26 @@ AZURE_SPEECH_REGION=your_azure_region
 ```
 
 Make sure to replace `your_azure_speech_key` and `your_azure_region` with your actual Azure credentials.
+
+### 6. Set Up Ollama Environment
+
+To activate the Ollama environment for project usage (with or without agents), use the following commands:
+
+#### For Linux:
+```bash
+export OPENAI_API_KEY=some-key
+export OPENAI_MODEL_NAME=llama3.2
+export OPENAI_BASE_URL=http://localhost:11434/v1
+```
+
+#### For Windows:
+```bash
+set OPENAI_API_KEY=some-key
+set OPENAI_MODEL_NAME=llama3.2
+set OPENAI_BASE_URL=http://localhost:11434/v1
+```
+
+Replace `some-key` and other placeholders with your specific values.
 
 ## Usage
 
@@ -79,9 +101,13 @@ Once executed, you can interact with the voice chat system. The workflow is as f
 2. **Model Processing**: The text is sent to the Ollama 3.2 model to generate a response.
 3. **Voice Response**: The generated text response is converted back to voice using Azure Text to Speech.
 
+## Current Project Status
+
+The project is currently resolving conflicts related to the integration and functionality of agents. The swarm technology is being refined to enhance efficiency and responsiveness.
+
 ## Ongoing Improvements
 
-We are currently working on enhancing the voice chat system by updating the language model (LLM) with agents using **swarm** technology. These improvements aim to increase the system's efficiency and responsiveness, providing an even more natural and fluid user experience.
+We are working on enhancing the voice chat system by updating the language model (LLM) with agents using **swarm** technology. These improvements aim to increase the system's efficiency and responsiveness, providing an even more natural and fluid user experience.
 
 ## Contributing
 

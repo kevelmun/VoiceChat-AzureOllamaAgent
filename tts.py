@@ -34,8 +34,8 @@ def text_to_speech(text):
         subscription=os.getenv('api_key'),
         region=os.getenv('region')
     )
-    speech_config.speech_synthesis_voice_name = 'es-MX-DaliaNeural' #es-MX-DaliaNeural
-    
+    # speech_config.speech_synthesis_voice_name = 'es-MX-DaliaNeural' #es-MX-DaliaNeural
+    speech_config.speech_synthesis_voice_name = "en-US-NovaMultilingualNeural"
     # Crear un sintetizador de voz
     speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config)
     

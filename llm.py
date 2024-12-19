@@ -1,14 +1,6 @@
-# from openai import OpenAI
-
-# client = OpenAI(
-
-#     base_url = 'http://localhost:11434/v1'
-#     api_key='ollama3.2' 
-# )
-
 import ollama
 
-mmodel = "loly"
+mmodel = "loly:small"
 conversation_history = []
 
 def model_response(user_input):
